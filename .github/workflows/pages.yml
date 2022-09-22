@@ -36,9 +36,12 @@ jobs:
       - name: Run the build process with Docker
         uses: addnab/docker-run-action@v3
         with:
-            image: pandoc/latex:latest
-            options: -v ${{ github.workspace }}:/data
+            image: ubuntu:22.04
+            options: -v ${{ github.workspace }}:/tmp
             run: |
+                cd /tmp
+                apt-get update
+                apt-get install -y pandoc texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra
                 sh build.sh slides/*.md
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
