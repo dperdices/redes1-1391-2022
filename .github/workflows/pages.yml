@@ -41,7 +41,7 @@ jobs:
             run: |
                 cd /mnt
                 apt-get update
-                apt-get install -y pandoc texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra
+                DEBIAN_FRONTEND=noninteractive apt-get install -y pandoc texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra
                 sh build.sh slides/*.md
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
