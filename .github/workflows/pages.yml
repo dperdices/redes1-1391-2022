@@ -39,7 +39,7 @@ jobs:
             image: pandoc/latex:latest
             options: -v ${{ github.workspace }}:/data
             run: |
-                build.sh slides/*.md
+                sh build.sh slides/*.md
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
