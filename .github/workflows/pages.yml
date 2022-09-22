@@ -43,11 +43,13 @@ jobs:
                 apt-get update
                 DEBIAN_FRONTEND=noninteractive apt-get install -y pandoc texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra
                 sh build.sh slides/*.md
+                mkdir build/
+                cp slides/*.pdf build/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           # Upload entire repository
-          path: 'slides/*.pdf'
+          path: 'build'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
