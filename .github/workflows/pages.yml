@@ -37,9 +37,9 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
             image: ubuntu:22.04
-            options: -v ${{ github.workspace }}:/tmp
+            options: -v ${{ github.workspace }}:/mnt
             run: |
-                cd /tmp
+                cd /mnt
                 apt-get update
                 apt-get install -y pandoc texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra
                 sh build.sh slides/*.md
