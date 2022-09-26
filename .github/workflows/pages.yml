@@ -46,7 +46,7 @@ jobs:
                 sh build.sh slides/*.md
                 mkdir build/
                 cp slides/*.pdf build/
-                ipython3 publish.py
+                ipython3 publish.ipy
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
