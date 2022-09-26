@@ -41,7 +41,7 @@ jobs:
             run: |
                 cd /mnt
                 apt-get update
-                DEBIAN_FRONTEND=noninteractive apt-get install -y pandoc texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra python3-ipython python3-pip
+                DEBIAN_FRONTEND=noninteractive apt-get install -y pandoc texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra python3-ipython python3-pip ipython3
                 pip install Jinja2
                 sh build.sh slides/*.md
                 mkdir build/
