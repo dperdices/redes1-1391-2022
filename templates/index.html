@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <ul>
+    {% for file in files %}
+        <li><a href="{{ file['url'] }}"> {{ file['name'] }} [Last modified {{ file['mtime'] }}] </a></li>
+    {% endfor %}
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+from jinja2 import Environment, select_autoescape, FileSystemLoader
+import os
+import datetime
+
+env = Environment(
+    autoescape=select_autoescape(),
+    loader=FileSystemLoader("templates/")
+)
+
+def get_gitmtime(file):
+    res = !git log -1 --pretty="format:%at" {file}
+    return datetime.datetime.fromtimestamp(int(res[0]))
+
+slides_paths = !ls slides/*.md
+all_slides = []
+for slides_path in slides_paths:
+    slides = {}
+    slides["path"] = slides_path
+    slides["name"] = "Slides " + slides_path.replace("slides/", "").replace(".md", "")
+    slides["url"] = slides_path.replace("slides/", "./").replace(".md", ".pdf")
+
+    slides["mtime"] = get_gitmtime(slides_path).strftime("%d/%m/%Y")
+    all_slides += [slides]
+
+!mkdir -p build/
+for file in os.listdir("templates"):
+    template = env.get_template(file)
+    output = file.replace("templates/", "build/")
+    with open("build/"+output, "w") as f:
+        f.write(template.render(files=all_slides))

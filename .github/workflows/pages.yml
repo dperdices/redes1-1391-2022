@@ -41,10 +41,12 @@ jobs:
             run: |
                 cd /mnt
                 apt-get update
-                DEBIAN_FRONTEND=noninteractive apt-get install -y pandoc texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra
+                DEBIAN_FRONTEND=noninteractive apt-get install -y pandoc texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra python3-ipython python3-pip
+                pip install Jinja2
                 sh build.sh slides/*.md
                 mkdir build/
                 cp slides/*.pdf build/
+                ipython3 publish.py
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
