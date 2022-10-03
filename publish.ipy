@@ -22,9 +22,20 @@ for slides_path in slides_paths:
     slides["mtime"] = get_gitmtime(slides_path).strftime("%d/%m/%Y")
     all_slides += [slides]
 
+resource_paths = !ls resource/*.md
+all_resources = []
+for resource_path in resource_paths:
+    resource = {}
+    resource["path"] = resource_path
+    resource["name"] = "Resource " + resource_path.replace("resource/", "").replace(".md", "")
+    resource["url"] = resource_path.replace("resource/", "./").replace(".md", ".pdf")
+
+    resource["mtime"] = get_gitmtime(resource_path).strftime("%d/%m/%Y")
+    all_resources += [resource]
+
 !mkdir -p build/
 for file in os.listdir("templates"):
     template = env.get_template(file)
     output = file.replace("templates/", "build/")
     with open("build/"+output, "w") as f:
-        f.write(template.render(files=all_slides))
+        f.write(template.render(files=all_slides, resources=all_resources))
