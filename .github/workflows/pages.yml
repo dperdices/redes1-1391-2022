@@ -50,6 +50,7 @@ jobs:
                 cp slides/*.pdf build/
                 git config --global --add safe.directory '*'
                 ipython3 publish.ipy
+                cp -r resources/ build/resources/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:

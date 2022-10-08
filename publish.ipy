@@ -27,7 +27,7 @@ all_resources = []
 for resource_path in resource_paths:
     resource = {}
     resource["path"] = resource_path
-    resource["name"] = "Resource " + resource_path.replace("resources/", "").replace(".md", "")
+    resource["name"] = resource_path.replace("resources/", "").replace(".md", "")
     resource["url"] = resource_path.replace("resources/", "./")
 
     resource["mtime"] = get_gitmtime(resource_path).strftime("%d/%m/%Y")
