@@ -34,6 +34,7 @@ for resource_path in resource_paths:
     all_resources += [resource]
 
 !mkdir -p build_templates/
+!mkdir -p build/
 for file in os.listdir("templates"):
     template = env.get_template(file)
     output = file.replace("templates/", "build_templates/")
