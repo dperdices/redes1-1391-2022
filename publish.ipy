@@ -33,9 +33,12 @@ for resource_path in resource_paths:
     resource["mtime"] = get_gitmtime(resource_path).strftime("%d/%m/%Y")
     all_resources += [resource]
 
-!mkdir -p build/
+!mkdir -p build_templates/
 for file in os.listdir("templates"):
     template = env.get_template(file)
-    output = file.replace("templates/", "build/")
-    with open("build/"+output, "w") as f:
+    output = file.replace("templates/", "build_templates/")
+    with open("build_templates/"+output, "w") as f:
         f.write(template.render(files=all_slides, resources=all_resources))
+
+!generate-md --layout github --input build_templates/ --output build/
+
